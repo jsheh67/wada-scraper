@@ -39,7 +39,10 @@ public class Main {
         System.out.println("enter number of pages");
         String pages = in.nextLine();
 
-        return new String[]{event, gender, pages};
+        System.out.println("enter the year");
+        String year = in.nextLine();
+
+        return new String[]{event, gender, pages,year};
 
     }
 
@@ -52,11 +55,11 @@ public class Main {
        // scrape("200-metres","men",3);
 
         String[] input= getInput();
-        scrape(input[0],input[1],Integer.parseInt(input[2]));
+        scrape(input[0],input[1],Integer.parseInt(input[2]),input[3]);
         //System.out.println(Thread.activeCount());
 
     }
-    public static void scrape(String distance, String gender, int pages) throws FileNotFoundException {
+    public static void scrape(String distance, String gender, int pages, String year) throws FileNotFoundException {
 
         String group = "middle-long";
         if(distance.charAt(0)<='4'){
@@ -94,7 +97,7 @@ public class Main {
 
         for (int i = 1; i <= pages; i++) {
 
-            driver.get("https://worldathletics.org/records/toplists/"+group+"/"+distance+"/outdoor/"+gender+"/senior/2023?regionType=world&timing=electronic&windReading=regular&page=" + i + "&bestResultsOnly=true");
+            driver.get("https://worldathletics.org/records/toplists/"+group+"/"+distance+"/outdoor/"+gender+"/senior/"+year+"?regionType=world&timing=electronic&windReading=regular&page=" + i + "&bestResultsOnly=true");
 
 
             String event = driver.findElement(By.xpath("/html/body/div[3]/div/div[1]/div[1]/h1")).getText();
@@ -164,32 +167,5 @@ public class Main {
         }
         writer.close();
     }
-       // next();
-
-          //  System.out.println("after loop "+i);
-
-           // Thread.sleep(300);
-
-           // WebElement nextpage = driver.findElement(By.xpath("/html/body/div[3]/div/div[2]/div/div/div[1]/div/a["+(i+1)+"]"));
-           // nextpage.click();
-           // Actions a = new Actions(driver);
-           // a.moveToElement(nextpage);
-           // int x =nextpage.getLocation().getX();
-           // int y = nextpage.getLocation().getY();
-
-            //executor.executeScript("window.scroll("+x+","+y+ ");");
-
-            //System.out.println( nextpage.getLocation().toString());
-
-         //   executor.executeScript("arguments[0].click();", nextpage);
-
-           // a.perform();
-          //  Thread.sleep(100);
-
-        //}
-
-        //driver.quit();
-
-
 
 }
