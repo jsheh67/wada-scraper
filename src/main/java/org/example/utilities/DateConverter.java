@@ -1,11 +1,11 @@
-package org.example;
+package org.example.utilities;
 
 import java.time.LocalDate;
 
 public class DateConverter {
 
 
-
+    //dates that are not full (month day year) will return null
     public static LocalDate convertDate(String date){
         if(date.isBlank()||date.isEmpty()||date==null|| date.length()<6) {
             return null;

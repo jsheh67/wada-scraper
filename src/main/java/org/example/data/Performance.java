@@ -1,8 +1,9 @@
-package org.example;
+package org.example.data;
 
+
+import org.example.data.Athlete;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Performance {
     private Athlete athlete;

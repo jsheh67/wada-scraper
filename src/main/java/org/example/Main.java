@@ -1,17 +1,14 @@
 package org.example;
 
+import org.example.data.Performance;
+import org.example.utilities.DateConverter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
 
-import javax.swing.table.TableRowSorter;
 import java.io.File;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -131,9 +128,9 @@ public class Main {
                             By.xpath(".//td[11]")).getText());
                     //   System.out.println(score);
 
-                    Performance p = new Performance(event, athlete, wind, date, dob, time, score);
-                    System.out.println(p.toCSV());
-                    writer.println(p.toCSV());
+//                    Performance p = new Performance(event, athlete, wind, date, dob, time, score);
+//                    System.out.println(p.toCSV());
+//                    writer.println(p.toCSV());
                 }
             }else{
                 for (WebElement record : performanceRecords) {
@@ -156,10 +153,10 @@ public class Main {
                     int score = Integer.parseInt(record.findElement(
                             By.xpath(".//td[10]")).getText());
                     //   System.out.println(score);
-
-                    Performance p = new Performance(event, athlete, date, dob, time, score);
-                    System.out.println(p.toCSV());
-                    writer.println(p.toCSV());
+//
+//                    Performance p = new Performance(event, athlete, date, dob, time, score);
+//                    System.out.println(p.toCSV());
+//                    writer.println(p.toCSV());
             }
 
             }
