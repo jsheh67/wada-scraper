@@ -5,38 +5,35 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Performance {
-    private String athlete;
-    private LocalDate date;
-    private LocalDate dob;
+    private Athlete athlete;
     private float time;
     private int score;
     private String event;
-
+    private LocalDate date;
     private String wind;
 
-    public Performance(String event, String athlete, LocalDate date, LocalDate dob, float time, int score){
-        this.event=event;
-        this.athlete=  athlete;
-        this.date= date;
-        this.dob=dob;
-        this.time=time;
-        this.score=score;
-    }
-    public Performance(String event, String athlete, String wind, LocalDate date, LocalDate dob,float time, int score){
-        this.event= event;
-        this.athlete=  athlete;
-        this.wind=wind;
-        this.date= date;
-        this.dob=dob;
-        this.time=time;
-        this.score=score;
+    public Performance(Athlete athlete, float time, int score, String event, LocalDate date, String wind) {
+        this.athlete = athlete;
+        this.time = time;
+        this.score = score;
+        this.event = event;
+        this.date = date;
+        this.wind = wind;
     }
 
-    public String getAthlete() {
+    public Performance(Athlete athlete, float time, int score, String event, LocalDate date) {
+        this.athlete = athlete;
+        this.time = time;
+        this.score = score;
+        this.event = event;
+        this.date = date;
+    }
+
+    public Athlete getAthlete() {
         return athlete;
     }
 
-    public void setAthlete(String athlete) {
+    public void setAthlete(Athlete athlete) {
         this.athlete = athlete;
     }
 
@@ -46,14 +43,6 @@ public class Performance {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
     }
 
     public float getTime() {
@@ -91,17 +80,17 @@ public class Performance {
     @Override
     public String toString() {
         return "Performance{" +
-                "athlete='" + athlete + '\'' +
-                ", date=" + date +
-                ", dob=" + dob +
+                "athlete=" + athlete +
                 ", time=" + time +
                 ", score=" + score +
                 ", event='" + event + '\'' +
-                ", wind=" + wind +
+                ", date=" + date +
+                ", wind='" + wind + '\'' +
                 '}';
     }
 
-    public  String toCSV(){
-        return event+","+athlete+","+dob+","+time+","+wind+","+score+","+date;
+    public  String toCSVWind(){
+        return event+","+athlete.toString()+","+","+time+","+wind+","+score+","+date;
     }
+    public String toCSVnoWind(){return event+","+athlete.toString()+","+","+time+","+score+","+date;}
 }

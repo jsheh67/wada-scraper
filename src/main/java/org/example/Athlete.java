@@ -7,9 +7,19 @@ public class Athlete {
     private LocalDate dob;
     private String country;
 
+    public Athlete(String name, LocalDate dob, String country) {
+        this.name = name;
+        this.dob = dob;
+        this.country = country;
+    }
+
+    public Athlete(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
-        return name+","+dob+","+country+",";
+        return name+","+dob+","+country;
     }
 
     public String getName() {
