@@ -1,5 +1,7 @@
 package org.example.utilities;
 
+import java.text.DecimalFormat;
+
 public class TimeConverter {
 
     public static float getSeconds(String time){
@@ -22,16 +24,59 @@ public class TimeConverter {
     }
 
     public static String getString(float seconds){
+        String time = null;
         //half marathon and marathon times are rounded to the second
-        if(seconds>(60*60)){
+        if(seconds>=(60*60)){
             int secondsRound = Math.round(seconds);
             int hours = (int)Math.floor(secondsRound/(3600));
             int minutes = (int)Math.floor((secondsRound%3600)/60);
             int secondsLeft = secondsRound-(hours*3600)-(minutes*60);
 
-            System.out.println(hours+":"+minutes+":"+secondsLeft);
+            String hoursS= String.valueOf(hours);
+            String minutesS = String.valueOf(minutes);
+            String secondsLeftS = String.valueOf(secondsLeft);
+
+            if(minutes<10){
+                minutesS = "0"+minutesS;
+            }
+            if (secondsLeft<10){
+                secondsLeftS="0"+secondsLeftS;
+            }
+            time=(hoursS+":"+minutesS+":"+secondsLeftS);
+
+        //half-marathon times
+        } else if (seconds>50*60) {
+            int secondsRound = Math.round(seconds);
+            int minutes = (int)Math.floor(secondsRound/60);
+            int secondsLeft = secondsRound-(minutes*60);
+
+            String minutesS = String.valueOf(minutes);
+            String secondsS= String.valueOf(secondsLeft);
+
+            if (seconds<10){
+                secondsS="0"+secondsS;
+            }
+            time=minutesS+":"+secondsS;
+        } else if (seconds>=60) {
+
+            DecimalFormat format = new DecimalFormat("00.00");
+            int minutes = (int)Math.floor(seconds/60);
+            float secondsLeft = seconds%60;
+
+            String secondsS= String.valueOf(secondsLeft);
+
+            String Seconds2= format.format(secondsLeft);
+
+           if(secondsLeft<10){
+                secondsS="0"+secondsS;
+           }
+            System.out.println(String.valueOf(minutes)+":"+Seconds2);
+           time= String.valueOf(minutes)+":"+secondsS;
         }
-        return "test";
+
+
+        System.out.println(time);
+        return time;
     }
 
 
@@ -47,6 +92,14 @@ public class TimeConverter {
 //        System.out.println(getSeconds(sprint)+"---"+sprint);
 
         getString(8188);
+        getString(3670);
+        System.out.println(getSeconds("1:01:10"));
+
+        getString(3400);
+        getString(104.51F);
+        getString(70.00F);
+
+
     }
 }
 
