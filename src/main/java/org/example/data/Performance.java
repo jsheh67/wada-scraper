@@ -93,5 +93,5 @@ public class Performance {
     public  String toCSVWind(){
         return event+","+athlete.toString()+","+","+time+","+wind+","+score+","+date;
     }
-    public String toCSVnoWind(){return event+","+athlete.toString()+","+","+time+","+score+","+date;}
+    public String toCSVnoWind(){return event+","+athlete.toString()+","+time+","+score+","+date;}
 }
