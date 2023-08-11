@@ -77,7 +77,7 @@ public class Main2 {
 
             double sum=0;
 
-            for(int b=0; b<=100;b++){
+            for(int b=0; b<100;b++){
                 WebElement row = performanceRecords.get(b);
                 float time_seconds = timeConverter.getSeconds(
                         row.findElement(By.xpath("./td[2]"))
@@ -87,7 +87,7 @@ public class Main2 {
                 LocalDate dob = DateConverter.convertDate(
                         row.findElement(By.xpath("./td[4]")).getText());
 
-                String country = row.findElement(By.xpath("./td[5]/text()")).getText();
+                String country = row.findElement(By.xpath("./td[5]")).getText();
 
                 LocalDate date = DateConverter.convertDate(
                         row.findElement(By.xpath("./td[9]")).getText());
@@ -105,16 +105,14 @@ public class Main2 {
             writer.println("--------"+a+"------------");
             writer.println("--------:avg top 100:"+avg_top100+"--avg top percent:"+avg_top+"-------");
 
-
-
-
         }
+        driver.quit();
 
 
 
-        List<WebElement> performanceRecords = driver.findElements(By.xpath("//table/tbody/tr"));
+       // List<WebElement> performanceRecords = driver.findElements(By.xpath("//table/tbody/tr"));
 
-        System.out.println(performanceRecords.size());
+      //  System.out.println(performanceRecords.size());
 
 
 

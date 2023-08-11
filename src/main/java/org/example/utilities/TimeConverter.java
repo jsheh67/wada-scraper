@@ -8,6 +8,10 @@ public class TimeConverter {
     DecimalFormat formatPoint = new DecimalFormat("00.00");
 
     public float getSeconds(String time){
+        if (time.contains("h")){
+            time=time.replace("h","0");
+        }
+
         float seconds;
         if (time.contains(":")&& !time.contains(".")){
             String[] times = time.split(":");
@@ -76,10 +80,10 @@ public class TimeConverter {
     public static void main(String[] args){
 
         TimeConverter t = new TimeConverter();
-//
-       String hour="2:16:28";
-//
+        String hour="2:16:28";
         System.out.println(t.getSeconds(hour)+"---"+hour);
+
+        System.out.println(t.getSeconds("3:36.5h"));
 
 
         t.getString(8188);
