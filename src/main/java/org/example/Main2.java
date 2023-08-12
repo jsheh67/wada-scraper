@@ -3,6 +3,7 @@ package org.example;
 import org.example.data.Athlete;
 import org.example.data.Performance;
 import org.example.utilities.DateConverter;
+import org.example.utilities.ScoreConverter;
 import org.example.utilities.TimeConverter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,7 +30,7 @@ public class Main2 {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 
-        String filename= "1500results.csv";
+        String filename= "1500results3.csv";
         File file = new File(filename);
         try {
             if (file.createNewFile()) {
@@ -42,7 +43,7 @@ public class Main2 {
         }
 
         PrintWriter writer = new PrintWriter(filename);
-        writer.println("event,name,dob,country,time,score,date");
+        writer.println("rank,event,name,dob,country,time,score,date");
 
         driver.get("https://www.worldometers.info/world-population/world-population-by-year/");
         List<WebElement> years = driver.findElements(By.xpath("//table/tbody/tr"));
@@ -70,12 +71,15 @@ public class Main2 {
         for(int a=2001;a<=2023;a++){
             //top percent
             double top=Math.floor(population.get(a)/100000000);
+            System.out.println(top);
             String year = String.valueOf(a);
             String address = "https://worldathletics.org/records/toplists/middle-long/1500-metres/outdoor/men/senior/"+year+"?regionType=world&page=1&bestResultsOnly=true";
             driver.get(address);
             List<WebElement> performanceRecords = driver.findElements(By.xpath("//table/tbody/tr"));
 
-            double sum=0;
+            double sum100=0;
+            double sumTop=0;
+
 
             for(int b=0; b<100;b++){
                 WebElement row = performanceRecords.get(b);
@@ -96,17 +100,26 @@ public class Main2 {
 
                 Athlete athlete = new Athlete(name,dob,country);
                 Performance p = new Performance(athlete,time_seconds,score,"men's 1500m",date);
-                writer.println(p.toCSVnoWind());
-                sum=sum+score;
+                writer.println((b+1)+","+p.toCSVnoWind());
+                sum100=sum100+score;
+                if(b<top){
+                    sumTop=sumTop+score;
+                }
 
             }
-            double avg_top100= sum/100;
-            double avg_top = sum/top;
-            writer.println("--------"+a+"------------");
-            writer.println("--------:avg top 100:"+avg_top100+"--avg top percent:"+avg_top+"-------");
+//            int avg_top100= (int) (sum100/100);
+//            int avg_top = (int) (sumTop/top);
+//
+//            String top100Time = timeConverter.getStringMinutes(ScoreConverter.fifteenPointsToTime(avg_top100));
+//            String topAVGTime = timeConverter.getStringMinutes(ScoreConverter.fifteenPointsToTime(avg_top));
+
+//            writer.println("--------"+(a)+"------------");
+//            writer.println("--------:avg top 100:"+top100Time+"--avg top percent:"+topAVGTime+"-------");
+//            writer.println("-------------------------");
 
         }
         driver.quit();
+        writer.close();
 
 
 
